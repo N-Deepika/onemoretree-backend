@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Contributor.init(
     {
-      first_name: {
+      full_name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -21,15 +21,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "First Name Cannot Be Empty" },
         },
       },
-      last_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: { msg: "User Must Have A Last Name" },
-          notEmpty: { msg: "Last Name Cannot Be Empty" },
-        },
-      },
-      location: {
+      city: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {

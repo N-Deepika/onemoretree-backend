@@ -1,28 +1,34 @@
 "use strict";
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("trees", {
+  async up(queryInterface, DataTypes) {
+    await queryInterface.createTable("customers", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      full_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      benefits: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+      email: {
+        type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: {
+            msg: "Must be a valid email address",
+          },
+        },
       },
-      image: {
+      contact_no: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      planted: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("trees");
+    await queryInterface.dropTable("customers");
   },
 };

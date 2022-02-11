@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Tree extends Model {
+  class Contribution extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,30 +11,29 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Tree.init(
+  Contribution.init(
     {
-      name: {
-        type: DataTypes.STRING,
+      contributor_id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "contributors",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
-      benefits: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false,
-      },
-      image: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      planted: {
+      count: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
+        allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: "Tree",
-      tableName: "trees",
+      modelName: "Contribution",
+      tableName: "contributions",
     }
   );
-  return Tree;
+  return Contribution;
 };

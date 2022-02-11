@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Distributor.init(
     {
-      first_name: {
+      full_name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -21,20 +21,12 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: { msg: "First Name Cannot Be Empty" },
         },
       },
-      last_name: {
+      city: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notNull: { msg: "User Must Have A Last Name" },
-          notEmpty: { msg: "Last Name Cannot Be Empty" },
-        },
-      },
-      location: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: { msg: "Location Required" },
-          notEmpty: { msg: "Location Cannot Be Empty" },
+          notNull: { msg: "City Required" },
+          notEmpty: { msg: "City Cannot Be Empty" },
         },
       },
       company_name: {

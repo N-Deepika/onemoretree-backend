@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Tree extends Model {
+  class Customer extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,30 +11,36 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Tree.init(
+  Customer.init(
     {
-      name: {
+      full_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      benefits: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+      email: {
+        type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: {
+            msg: "Must be a valid email address",
+          },
+        },
       },
-      image: {
+      contact_no: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      planted: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: "Tree",
-      tableName: "trees",
+      modelName: "Customer",
+      tableName: "customers",
     }
   );
-  return Tree;
+  return Customer;
 };
